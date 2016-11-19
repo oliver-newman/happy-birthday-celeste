@@ -1,6 +1,32 @@
 {% extends "base.html" %}
 {% block body %}
-  <div class="center-vertical">
-    <h1 class="center-heading">Happy Birthday, Celeste!</a>
+  <div id="hbd" class="center-vertical">
+    <h1>Happy Birthday, Celeste!</h1>
+    <button id="letter-button" class="button">Click Me 
+      <span class="glyphicon glyphicon-menu-right"></span>
+    </button>
   </div>
+  <div id="letter" class="container center-vertical">
+    {# TODO: maybe have a button here for reloading page/closing letter #}
+    <p>
+      Dear Celeste,
+    </p>
+
+    <p>
+      Sit dolore dignissimos totam explicabo accusamus Qui tempora ab et
+      deleniti voluptatem eum molestiae Libero adipisci doloremque nobis
+      laborum doloribus doloribus. Adipisci perferendis laborum expedita nihil
+      quibusdam temporibus Nobis veritatis.
+    </p>
+
+    <p>
+      Happy birthday!! 
+    </p>
+
+    <p>
+      Love, Oliver
+    </p>
+
+  </div>
+  <script src="{{ url_for('static', filename='js/balloons.js') }}"></script>
 {% endblock %}
