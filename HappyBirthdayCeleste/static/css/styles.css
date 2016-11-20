@@ -22,7 +22,7 @@ body {
 
 #hbd {
   display: none;
-  z-index: 0;
+  z-index: 10;
   text-align: center;
 }
 
@@ -42,7 +42,7 @@ body {
 
 #letter {
   display: none;
-  z-index: 5;
+  z-index: 11;
   padding: 20px;
   background: white;
   border: 1px solid #888888;

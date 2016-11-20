@@ -1,8 +1,15 @@
 $(document).ready(function() {
+  var ticker, scene;
+  document.body.addEventListener("balloonsGone", function () {
+    // $("#hbd").css("display", "inline");
+    $("#hbd").fadeIn(600);
+    scene.reset();
+    delete scene;
+  }, false);
+
   var height = screen.height;
   var width = screen.width;
-  var scene = sjs.Scene({w: width, h: height, autoPause: false});
-  var layer = scene.Layer({useCanvas: true});
+  scene = sjs.Scene({w: width, h: height, autoPause: false});
 
   var colors = ["blue", "green", "orange", "pink", "red", "yellow"];
   var images = [];
@@ -11,42 +18,44 @@ $(document).ready(function() {
     images.push("/static/images/" + colors[i] + "_balloon.png");
   }
 
-  var numSprites = Math.floor(width / 5);
-  var sprites = sjs.List();
-  var lastSprite;
+  var numBalloons = Math.floor(width / 8);
+  var balloons = sjs.List();
+  var lastBalloon;
+  var balloonsGone;
+
   scene.loadImages(images, function() {
     var filename;
-    var sp;
-    for (var i = 0; i < numSprites; i++) {
+    var balloon;
+    for (var i = 0; i < numBalloons; i++) {
       filename = images[i % images.length];
       
-      sp = scene.Sprite(filename);
+      balloon = scene.Sprite(filename);
       var yRand = Math.random();
-      sp.position((31 * i) % width - 100, height + yRand * yRand * 1.5 * height);
+      balloon.position((31 * i) % width - 100, height * (1 + yRand*yRand * 1.5));
 
-      sprites.add(sp);
+      balloons.add(balloon);
     }
-    lastSprite = scene.Sprite(images[0]);
-    lastSprite.position(width / 2, 2.5 * height);
-    lastSprite.update();
-    sprites.add(lastSprite);
 
-    var ticker = scene.Ticker(25, paint);
+    balloonsGone = new CustomEvent("balloonsGone");
+    lastBalloon = scene.Sprite(images[0]);
+    lastBalloon.position(width / 2, 2.5 * height);
+    lastBalloon.update();
+    balloons.add(lastBalloon);
+
+    ticker = scene.Ticker(25, paint);
     ticker.run();
   });
 
   function paint() {
-    var sp;
-    while(sp = sprites.iterate()) {
-      sp.update();
-      // sp.rotate(3.14 / 4);
-      sp.move(0, -5 + Math.random() * 3);
+    var balloon;
+    while(balloon = balloons.iterate()) {
+      balloon.update();
+      balloon.move(0, -5 + Math.random() * 3);
+    }
+    if (lastBalloon.y + 1.5 * lastBalloon.h < 0) {
+      document.body.dispatchEvent(balloonsGone);
     }
   }
-
-  setTimeout(function() {
-    $("#hbd").css("display", "inline");
-  }, 1000);
 
   $("#letter-button").click(function() {
     $("#letter").css("display", "inline");
