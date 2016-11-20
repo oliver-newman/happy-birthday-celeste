@@ -14,20 +14,19 @@ $(document).ready(function() {
   var sprites = sjs.List();
   var lastSprite;
   scene.loadImages(images, function() {
+    alert(numSprites);
     var filename;
     var sp;
     for (var i = 0; i < numSprites; i++) {
       filename = images[i % images.length];
       
       sp = scene.Sprite(filename);
-      sp.position((31 * i) % width - 300, height + Math.random()**3 * 1.5 * height);
-      sp.scale(0.5);
+      sp.position((31 * i) % width - 100, height + Math.random()**2 * 1.5 * height);
 
       sprites.add(sp);
     }
     lastSprite = scene.Sprite(filename);
     lastSprite.position(width / 2, 2.5 * height);
-    lastSprite.scale(0.5);
     sprites.add(lastSprite);
 
     var ticker = scene.Ticker(25, paint);
