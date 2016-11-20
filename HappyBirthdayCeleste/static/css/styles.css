@@ -2,8 +2,13 @@
   box-sizing: border-box;
 }
 
-body, html {
+html {
   height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
 }
 
 .center-vertical {
@@ -24,6 +29,7 @@ body, html {
 .button {
   border: 1px solid #888888;
   border-radius: 10px;
+  background: white;
   outline: none;
   padding: 5px 15px 5px 15px;
   font-size: 1.5em;
