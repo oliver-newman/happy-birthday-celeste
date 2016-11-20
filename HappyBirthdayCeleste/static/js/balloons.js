@@ -42,11 +42,21 @@ $(document).ready(function() {
     }
   }
 
+  Sprite.getImageFromCache = function(src) {
+      //return images[src] ? images[src] : null;
+      return null;
+  };
+
+  Sprite.saveImageToCache = function(src, image) {
+      //images[src] = image;
+  };
+
   setTimeout(function() {
     $("#hbd").css("display", "inline");
   }, 10000);
+
+  $("#letter-button").click(function() {
+    $("#letter").css("display", "inline");
+  });
 });
 
-$("#letter-button").click(function() {
-  $("#letter").css("display", "inline");
-});
