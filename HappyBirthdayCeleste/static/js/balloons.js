@@ -2,6 +2,7 @@ $(document).ready(function() {
   var height = window.innerHeight;
   var width = window.innerWidth;
   var scene = sjs.Scene({w: width, h: height, autoPause: false});
+  var layer = scene.Layer({useCanvas: true});
 
   var colors = ["blue", "green", "orange", "pink", "red", "yellow"];
   var images = [];
