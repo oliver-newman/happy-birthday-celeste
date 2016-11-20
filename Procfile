@@ -1,1 +1,1 @@
-web: gunicorn HappyBirthDayCeleste:app --log-file -
+web: gunicorn HappyBirthdayCeleste:app --log-file -
