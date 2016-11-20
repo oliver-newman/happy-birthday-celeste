@@ -14,7 +14,6 @@ $(document).ready(function() {
   var sprites = sjs.List();
   var lastSprite;
   scene.loadImages(images, function() {
-    alert(numSprites);
     var filename;
     var sp;
     for (var i = 0; i < numSprites; i++) {
