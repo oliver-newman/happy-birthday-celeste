@@ -1,1 +1,1 @@
-web: gunicorn gpa_calc:app --log-file -
+web: gunicorn HappyBirthDayCeleste:app --log-file -
