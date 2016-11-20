@@ -11,8 +11,7 @@ $(document).ready(function() {
     images.push("/static/images/" + colors[i] + "_balloon.png");
   }
 
-  // var numSprites = Math.floor(width / 5);
-  var numSprites = 3;
+  var numSprites = Math.floor(width / 5);
   var sprites = sjs.List();
   var lastSprite;
   scene.loadImages(images, function() {
