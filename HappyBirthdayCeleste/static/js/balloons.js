@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  var height = window.innerHeight;
-  var width = window.innerWidth;
+  var height = screen.height;
+  var width = screen.width;
   var scene = sjs.Scene({w: width, h: height, autoPause: false});
   var layer = scene.Layer({useCanvas: true});
 
@@ -11,7 +11,7 @@ $(document).ready(function() {
     images.push("/static/images/" + colors[i] + "_balloon.png");
   }
 
-  var numSprites = 6; // Math.floor(width / 5);
+  var numSprites = Math.floor(width / 5);
   var sprites = sjs.List();
   var lastSprite;
   scene.loadImages(images, function() {
@@ -21,12 +21,14 @@ $(document).ready(function() {
       filename = images[i % images.length];
       
       sp = scene.Sprite(filename);
-      sp.position((31 * i) % width - 100, height + Math.random()**2 * 1.5 * height);
+      var yRand = Math.random();
+      sp.position((31 * i) % width - 100, height + yRand * yRand * 1.5 * height);
 
       sprites.add(sp);
     }
-    lastSprite = scene.Sprite(filename);
+    lastSprite = scene.Sprite(images[0]);
     lastSprite.position(width / 2, 2.5 * height);
+    lastSprite.update();
     sprites.add(lastSprite);
 
     var ticker = scene.Ticker(25, paint);
@@ -42,18 +44,9 @@ $(document).ready(function() {
     }
   }
 
-  Sprite.getImageFromCache = function(src) {
-      //return images[src] ? images[src] : null;
-      return null;
-  };
-
-  Sprite.saveImageToCache = function(src, image) {
-      //images[src] = image;
-  };
-
   setTimeout(function() {
     $("#hbd").css("display", "inline");
-  }, 10000);
+  }, 1000);
 
   $("#letter-button").click(function() {
     $("#letter").css("display", "inline");
