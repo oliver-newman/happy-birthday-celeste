@@ -1,10 +1,10 @@
-$(document).ready(function() {
+function playBalloons() {
   var ticker, scene;
+
   document.body.addEventListener("balloonsGone", function () {
-    // $("#hbd").css("display", "inline");
     $("#hbd").fadeIn(600);
     scene.reset();
-    delete scene;
+    delete scene, ticker;
   }, false);
 
   var width = Math.min(window.innerWidth, screen.width);
@@ -19,7 +19,7 @@ $(document).ready(function() {
   }
 
   var numBalloons = Math.floor(width / 8);
-  var balloons = sjs.List();
+  var balloons = sjs.List([]);
   var lastBalloon;
   var balloonsGone;
 
@@ -42,23 +42,40 @@ $(document).ready(function() {
     lastBalloon.update();
     balloons.add(lastBalloon);
 
+    function paint() {
+      var balloon;
+      while(balloon = balloons.iterate()) {
+        balloon.update();
+        balloon.move(0, -5 + Math.random() * 3);
+      }
+      if (lastBalloon.y + 1.5 * lastBalloon.h < 0) {
+        document.body.dispatchEvent(balloonsGone);
+      }
+    }
+
     ticker = scene.Ticker(25, paint);
     ticker.run();
   });
+}
 
-  function paint() {
-    var balloon;
-    while(balloon = balloons.iterate()) {
-      balloon.update();
-      balloon.move(0, -5 + Math.random() * 3);
-    }
-    if (lastBalloon.y + 1.5 * lastBalloon.h < 0) {
-      document.body.dispatchEvent(balloonsGone);
-    }
-  }
+
+$(document).ready(function() {
+  playBalloons();
 
   $("#letter-button").click(function() {
-    $("#letter").css("display", "inline");
+    // $("#letter").css("display", "inline");
+    $("#letter").slideDown();
+  });
+  $("#close-letter").click(function() {
+    // $("#letter").css("display", "none");
+    $("#letter").slideUp();
+  });
+  $("#repeat-balloons").click(function() {
+    playBalloons();
+    // $("#letter").css("display", "none");
+    $("#letter").slideUp(complete = function () {
+      $("#hbd").fadeOut(600);
+    });
   });
 });
 

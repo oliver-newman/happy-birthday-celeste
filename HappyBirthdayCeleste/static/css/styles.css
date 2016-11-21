@@ -48,4 +48,21 @@ body {
   border: 1px solid #888888;
   font-size: 1.5em;
   overflow: auto;
+  width: 80%;
+  height: 80%;
+  max-height: 300px;
+  max-width: 500px;
+}
+
+#letter-controls {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  color: #aaaaaa;
+}
+
+#letter-controls a, #letter-controls a:hover, #letter-controls a:active {
+  color: #aaaaaa;
+  text-decoration: none;
+  cursor: pointer;
 }
