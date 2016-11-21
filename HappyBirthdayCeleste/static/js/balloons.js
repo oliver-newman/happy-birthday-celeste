@@ -1,19 +1,34 @@
+var width = Math.min(window.innerWidth, screen.width);
+var height = Math.min(window.innerHeight, screen.height);
+var scene = sjs.Scene({w: width, h: height, autoPause: false});
+
+$(document).ready(function() {
+  playBalloons();
+
+  $("#letter-button").click(function() { // Show letter when button is clicked
+    $("#letter").slideDown();
+  });
+  $("#close-letter").click(function() { // Hide letter when x is clicked
+    $("#letter").slideUp();
+  });
+  $("#repeat-balloons").click(function() { // Repeat balloon animation
+    $("#letter").slideUp(complete = function () {
+      $("#hbd").fadeOut(600, playBalloons)
+    });
+  });
+});
+
+
 function playBalloons() {
-  var ticker, scene;
+  var ticker;
 
   document.body.addEventListener("balloonsGone", function () {
     $("#hbd").fadeIn(600);
     scene.reset();
-    delete scene, ticker;
   }, false);
-
-  var width = Math.min(window.innerWidth, screen.width);
-  var height = Math.min(window.innerHeight, screen.height);
-  scene = sjs.Scene({w: width, h: height, autoPause: false});
 
   var colors = ["blue", "green", "orange", "pink", "red", "yellow"];
   var images = [];
-
   for (var i = 0; i < colors.length; i++) {
     images.push("/static/images/" + colors[i] + "_balloon.png");
   }
@@ -57,25 +72,3 @@ function playBalloons() {
     ticker.run();
   });
 }
-
-
-$(document).ready(function() {
-  playBalloons();
-
-  $("#letter-button").click(function() {
-    // $("#letter").css("display", "inline");
-    $("#letter").slideDown();
-  });
-  $("#close-letter").click(function() {
-    // $("#letter").css("display", "none");
-    $("#letter").slideUp();
-  });
-  $("#repeat-balloons").click(function() {
-    playBalloons();
-    // $("#letter").css("display", "none");
-    $("#letter").slideUp(complete = function () {
-      $("#hbd").fadeOut(600);
-    });
-  });
-});
-
