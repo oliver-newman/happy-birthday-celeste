@@ -7,8 +7,8 @@ $(document).ready(function() {
     delete scene;
   }, false);
 
-  var height = screen.height;
-  var width = screen.width;
+  var width = Math.min(window.innerWidth, screen.width);
+  var height = Math.min(window.innerHeight, screen.height);
   scene = sjs.Scene({w: width, h: height, autoPause: false});
 
   var colors = ["blue", "green", "orange", "pink", "red", "yellow"];
