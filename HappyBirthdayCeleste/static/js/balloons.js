@@ -56,7 +56,7 @@ function playBalloons(scene, width, height) {
       let balloon = null;
       while(balloon = balloons.iterate()) {
         balloon.update();
-        balloon.move(0, -5 + Math.random() * 3);
+        balloon.move(0, -50 + Math.random() * 3);
       }
       if (lastBalloon.y + 1.5 * lastBalloon.h < 0) {
         document.body.dispatchEvent(balloonsGone);
