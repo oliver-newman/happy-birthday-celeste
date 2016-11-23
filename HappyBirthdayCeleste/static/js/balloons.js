@@ -13,7 +13,9 @@ $(document).ready(function() {
   });
   $("#repeat-balloons").click(function() { // Repeat balloon animation
     $("#letter").slideUp(complete = function () {
-      $("#hbd").fadeOut(600, playBalloons(scene, width, height))
+      $("#hbd").fadeOut(600, complete = function () {
+        playBalloons(scene, width, height);
+      });
     });
   });
 });
